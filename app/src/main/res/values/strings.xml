@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TaskMaster</string>
+    <string name="email">Email</string>
+    <string name="log_in">Log In</string>
+    <string name="forget_password">Forget password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="taskmaster">TaskMaster</string>
+    <string name="email_input">Email</string>
+    <string name="password_input">Password</string>
+</resources>
