@@ -3,6 +3,7 @@ package com.example.taskmaster;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -46,6 +47,8 @@ public class Register_Page extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        boolean successful = false;
+
         switch (v.getId()) {
             case R.id.registerButton:
                 registerUser();
@@ -117,9 +120,8 @@ public class Register_Page extends AppCompatActivity implements View.OnClickList
                                             if(task.isSuccessful()) {
                                                 Toast.makeText(Register_Page.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
-
+                                                startActivity(new Intent(Register_Page.this, MainActivity.class));
                                                 //redirect to login page
-
                                             } else {
                                                 Toast.makeText(Register_Page.this, "User fail to register!", Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
