@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView signUp;
     private TextInputEditText mainTextEmail, mainTextPassword;
-    private Button logIn;
+    private Button logIn, forgor;
 
     private FirebaseAuth mAuth;
     private ProgressBar mainProgressBar;
@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         logIn = (Button) findViewById(R.id.logInButton);
         logIn.setOnClickListener(this);
 
+        forgor = (Button) findViewById(R.id.button7);
+        forgor.setOnClickListener(this);
+
         mainTextEmail = (TextInputEditText)  findViewById(R.id.mainEmail);
         mainTextPassword = (TextInputEditText)  findViewById(R.id.mainPassword);
 
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
             case R.id.button6:
                 startActivity(new Intent(this, Register_Page.class));
                 break;
@@ -56,6 +60,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.logInButton:
                 userLogin();
                 break;
+
+            case R.id.button7:
+                startActivity(new Intent(this,reset.class));
+                break;
+
         }
     }
 
