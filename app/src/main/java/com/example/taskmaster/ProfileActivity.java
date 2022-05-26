@@ -59,12 +59,22 @@ public class ProfileActivity extends AppCompatActivity {
                     String fullName = userProfile.fullName;
                     String email = userProfile.email;
 
-                    fullName = fullName.substring(0, Math.min(fullName.length(), 15));
-                    email = email.substring(0, Math.min(email.length(), 15));
+                    /*if(fullName.length() <= 15 && email.length() <= 15) {
+                        nameTextView.setText(fullName);
+                        emailTextView.setText(email);
+                    }*/
 
+                    if (fullName.length() > 15) {
+                        fullName = fullName.substring(0, Math.min(fullName.length(), 15)) + "...";
+                        //nameTextView.setText(fullName + "...");
+                    }
 
-                    nameTextView.setText(fullName + "...");
-                    emailTextView.setText(email +"...");
+                    if (email.length() > 15) {
+                        email = email.substring(0, Math.min(email.length(), 15)) + "...";
+                    //emailTextView.setText(email + "...");
+                    }
+                    nameTextView.setText(fullName);
+                    emailTextView.setText(email);
                 }
 
             }
