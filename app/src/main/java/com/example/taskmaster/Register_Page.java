@@ -3,6 +3,7 @@ package com.example.taskmaster;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Register_Page extends AppCompatActivity implements View.OnClickListener{
@@ -46,6 +48,8 @@ public class Register_Page extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        boolean successful = false;
+
         switch (v.getId()) {
             case R.id.registerButton:
                 registerUser();
@@ -115,11 +119,12 @@ public class Register_Page extends AppCompatActivity implements View.OnClickList
                                         public void onComplete(@NonNull Task<Void> task) {
 
                                             if(task.isSuccessful()) {
-                                                Toast.makeText(Register_Page.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(Register_Page.this, "Please check email for verification (spam)!", Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
-
+                                                FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+                                                user.sendEmailVerification();
+                                                startActivity(new Intent(Register_Page.this, MainActivity.class));
                                                 //redirect to login page
-
                                             } else {
                                                 Toast.makeText(Register_Page.this, "User fail to register!", Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
