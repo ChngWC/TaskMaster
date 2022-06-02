@@ -67,7 +67,7 @@ public class reset extends AppCompatActivity {
                     startActivity(new Intent(reset.this, MainActivity.class));
 
                 }else{
-                    Toast.makeText(reset.this,"somethang wong",Toast.LENGTH_LONG).show();
+                    Toast.makeText(reset.this,"Something went wrong",Toast.LENGTH_LONG).show();
                 }
             }
         });
