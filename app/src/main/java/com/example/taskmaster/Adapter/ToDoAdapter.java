@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskmaster.R;
+import com.example.taskmaster.TaskList;
 import com.example.taskmaster.Tasks;
 import com.example.taskmaster.model.ToDoModel;
 
@@ -16,9 +17,9 @@ import java.util.List;
 public class ToDoAdapter extends RecyclerView.Adapter <ToDoAdapter.ViewHolder> {
 
     private List<ToDoModel> todoList;
-    private Tasks activity;
+    private TaskList activity;
 
-    public ToDoAdapter(Tasks activity){
+    public ToDoAdapter(TaskList activity){
         this.activity = activity;
     }
 
@@ -53,7 +54,7 @@ public class ToDoAdapter extends RecyclerView.Adapter <ToDoAdapter.ViewHolder> {
 
         ViewHolder(View view){
             super(view);
-            task= view.findViewById(R.id.todocheckbox);
+            task= view.findViewById(R.id.toDoCheckBox);
         }
 
     }

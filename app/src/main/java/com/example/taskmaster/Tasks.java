@@ -14,17 +14,17 @@ import java.util.List;
 
 public class Tasks extends AppCompatActivity {
 
-    private RecyclerView tasksRecyclerView;
+    /*private RecyclerView tasksRecyclerView;
     private ToDoAdapter tasksAdapter;
 
-    private List<ToDoModel> taskList;
+    private List<ToDoModel> taskList;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
 
-        taskList= new ArrayList<>();
+       /* taskList= new ArrayList<>();
 
         tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -42,6 +42,6 @@ public class Tasks extends AppCompatActivity {
         taskList.add(task);
         taskList.add(task);
 
-        tasksAdapter.setTasks(taskList);
+        tasksAdapter.setTasks(taskList);*/
     }
 }

@@ -24,24 +24,25 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference reference;
     private String userID;
 
-    private Button signout;
-    private Button task;
+    private Button signout, taskList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        taskList = (Button) findViewById(R.id.taskList_button);
 
-        signout = (Button) findViewById(R.id.signout);
-        task= (Button) findViewById(R.id.task);
-
-        task.setOnClickListener(new View.OnClickListener() {
+        taskList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, Tasks.class));
+                startActivity(new Intent(ProfileActivity.this, TaskList.class));
             }
         });
+
+
+
+        signout = (Button) findViewById(R.id.signout);
 
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
