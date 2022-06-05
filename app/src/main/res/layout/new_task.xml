@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -16,14 +17,28 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
+    <TextView
+        android:id="@+id/set_due_date"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_alignBottom="@+id/newTaskText"
+        android:layout_marginBottom="-44dp"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/press_start_2p"
+        android:text="@string/set_due_date"
+        android:textColor="#58AF01"
+        android:textSize="12sp"
+        tools:ignore="TextContrastCheck"
+        app:drawableRightCompat="@drawable/ic_baseline_calendar_today" />
+
     <Button
-        android:id="@+id/newTaskButton"
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/newTaskText"
         android:layout_alignParentEnd="true"
         android:fontFamily="@font/press_start_2p"
         android:text="@string/save"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
 </RelativeLayout>

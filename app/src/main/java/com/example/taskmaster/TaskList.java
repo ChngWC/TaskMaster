@@ -11,15 +11,17 @@ import android.widget.Button;
 
 import com.example.taskmaster.Adapter.ToDoAdapter;
 import com.example.taskmaster.model.ToDoModel;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList extends AppCompatActivity {
 
-    private Button back;
+    private Button back, addbutton;
     private RecyclerView taskRecycler;
     private ToDoAdapter taskAdapter;
+
 
     private List<ToDoModel> taskList;
 
@@ -40,6 +42,7 @@ public class TaskList extends AppCompatActivity {
 
         taskList = new ArrayList<>();
 
+        addbutton = (Button) findViewById(R.id.addTask_Button);
         taskRecycler = (RecyclerView) findViewById(R.id.taskRecycler);
         taskRecycler.setLayoutManager(new LinearLayoutManager(this));
         taskAdapter = new ToDoAdapter(this);
@@ -57,5 +60,15 @@ public class TaskList extends AppCompatActivity {
         taskList.add(task);
 
         taskAdapter.setTasks(taskList);
+
+        addbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewTask.newInstance().show(getSupportFragmentManager(), addNewTask.TAG);
+
+            }
+        });
+
+
     }
 }
