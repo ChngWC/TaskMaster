@@ -1,5 +1,6 @@
 package com.example.taskmaster;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,9 +12,14 @@ import android.widget.Button;
 
 import com.example.taskmaster.Adapter.ToDoAdapter;
 import com.example.taskmaster.model.ToDoModel;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TaskList extends AppCompatActivity {
@@ -21,8 +27,7 @@ public class TaskList extends AppCompatActivity {
     private Button back, addbutton;
     private RecyclerView taskRecycler;
     private ToDoAdapter taskAdapter;
-
-
+    private FirebaseFirestore firestore;
     private List<ToDoModel> taskList;
 
     @Override
@@ -43,12 +48,19 @@ public class TaskList extends AppCompatActivity {
         taskList = new ArrayList<>();
 
         addbutton = (Button) findViewById(R.id.addTask_Button);
+        firestore = FirebaseFirestore.getInstance();
         taskRecycler = (RecyclerView) findViewById(R.id.taskRecycler);
-        taskRecycler.setLayoutManager(new LinearLayoutManager(this));
-        taskAdapter = new ToDoAdapter(this);
-        taskRecycler.setAdapter(taskAdapter);
 
-        ToDoModel task = new ToDoModel();
+        taskRecycler.setHasFixedSize(true);
+        taskRecycler.setLayoutManager(new LinearLayoutManager(this));
+        taskAdapter = new ToDoAdapter(TaskList.this, taskList);
+
+        taskRecycler.setAdapter(taskAdapter);
+        showData();
+
+
+        //for testing purpose*****
+        /*ToDoModel task = new ToDoModel();
         task.setTask("This is a Test Task");
         task.setStatus(0);
         task.setId(1);
@@ -59,7 +71,8 @@ public class TaskList extends AppCompatActivity {
         taskList.add(task);
         taskList.add(task);
 
-        taskAdapter.setTasks(taskList);
+        taskAdapter.setTasks(taskList);*/
+        //for testing purpose*****
 
         addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,5 +83,24 @@ public class TaskList extends AppCompatActivity {
         });
 
 
+    }
+
+    private void showData() {
+        firestore.collection("task").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for (DocumentChange documentChange : value.getDocumentChanges()) {
+                    if( documentChange.getType() == DocumentChange.Type.ADDED) {
+                        String id = documentChange.getDocument().getId();
+                        ToDoModel toDoModel = documentChange.getDocument().toObject(ToDoModel.class).withId(id);
+
+                        taskList.add(toDoModel);
+                        taskAdapter.notifyDataSetChanged();
+
+                    }
+                }
+                Collections.reverse(taskList);
+            }
+        });
     }
 }

@@ -1,7 +1,7 @@
 package com.example.taskmaster.model;
 
-public class ToDoModel {
-    private int id, status;
+public class ToDoModel extends TaskId{
+    /*private int id, status;
     private String task;
 
     public int getId() {
@@ -26,5 +26,20 @@ public class ToDoModel {
 
     public void setTask(String task) {
         this.task = task;
+    }*/
+
+    private String task, due;
+    private int status;
+
+    public String getTask() {
+        return task;
+    }
+
+    public String getDue() {
+        return due;
+    }
+
+    public int getStatus() {
+        return status;
     }
 }
