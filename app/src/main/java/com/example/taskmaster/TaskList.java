@@ -9,9 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.taskmaster.Adapter.ToDoAdapter;
 import com.example.taskmaster.model.ToDoModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -86,7 +89,11 @@ public class TaskList extends AppCompatActivity {
     }
 
     private void showData() {
-        firestore.collection("task").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        //Object id = currentFirebaseUser.getUid();
+        //Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
+        // Testing the retrieval of userID
+        firestore.collection("Users").document(currentFirebaseUser.getUid()).collection("Tasks").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 for (DocumentChange documentChange : value.getDocumentChanges()) {

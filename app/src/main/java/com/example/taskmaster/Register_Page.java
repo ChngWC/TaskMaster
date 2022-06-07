@@ -22,6 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -142,6 +143,7 @@ public class Register_Page extends AppCompatActivity implements View.OnClickList
                                                 userMap.put("Name",fullName);
                                                 userMap.put("Email", email);
                                                 documentReference.set(userMap);
+                                                FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
                                                 startActivity(new Intent(Register_Page.this, MainActivity.class));
                                                 //redirect to login page
                                             } else {

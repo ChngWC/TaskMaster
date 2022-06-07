@@ -106,6 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if(task.isSuccessful()) {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    //startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                    // Just to skip verification for testing
 
                     if (user.isEmailVerified()) {
                         startActivity(new Intent(MainActivity.this, ProfileActivity.class));

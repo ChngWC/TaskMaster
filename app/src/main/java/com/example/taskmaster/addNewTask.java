@@ -24,6 +24,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -124,7 +126,9 @@ public class addNewTask extends BottomSheetDialogFragment {
                     taskMap.put("due", dueDate);
                     taskMap.put("status", 0);
 
-                    firestore.collection("task").add(taskMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+
+                    firestore.collection("Users").document(currentFirebaseUser.getUid()).collection("Tasks").add(taskMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
                             if ( task.isSuccessful()) {
