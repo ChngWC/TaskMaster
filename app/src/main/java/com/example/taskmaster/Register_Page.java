@@ -1,6 +1,7 @@
 package com.example.taskmaster;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -21,6 +22,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Register_Page extends AppCompatActivity implements View.OnClickListener{
 
@@ -28,6 +37,7 @@ public class Register_Page extends AppCompatActivity implements View.OnClickList
      private ProgressBar progressBar;
 
     private FirebaseAuth mAuth;
+    private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +45,7 @@ public class Register_Page extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_register_page);
 
         mAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
 
         TextView registerUser = (Button) findViewById(R.id.registerButton);
         registerUser.setOnClickListener(this);
@@ -112,6 +123,8 @@ public class Register_Page extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             User user = new User(fullName, email);
 
+
+
                             FirebaseDatabase.getInstance("https://taskmaster-15439-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -123,6 +136,12 @@ public class Register_Page extends AppCompatActivity implements View.OnClickList
                                                 progressBar.setVisibility(View.GONE);
                                                 FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
                                                 user.sendEmailVerification();
+                                                firestore = FirebaseFirestore.getInstance();
+                                                DocumentReference documentReference = firestore.collection("Users").document(user.getUid());
+                                                Map<String, Object> userMap = new HashMap<>();
+                                                userMap.put("Name",fullName);
+                                                userMap.put("Email", email);
+                                                documentReference.set(userMap);
                                                 startActivity(new Intent(Register_Page.this, MainActivity.class));
                                                 //redirect to login page
                                             } else {
