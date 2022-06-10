@@ -27,6 +27,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -43,6 +44,8 @@ public class addNewTask extends BottomSheetDialogFragment {
     private FirebaseFirestore firestore;
     private Context context;
     private String dueDate = "";
+    private String id = "";
+    private String dueDateUpdate = "";
 
     public static addNewTask newInstance() {
         return new addNewTask();
@@ -63,6 +66,24 @@ public class addNewTask extends BottomSheetDialogFragment {
         saveBtn = view.findViewById(R.id.saveButton);
 
         firestore = FirebaseFirestore.getInstance();
+
+        boolean isUpdate = false;
+
+        final Bundle bundle = getArguments();
+        if (bundle != null){
+            isUpdate = true;
+            String task = bundle.getString("task");
+            id = bundle.getString("id");
+            dueDateUpdate = bundle.getString("due");
+
+            mTaskEdit.setText(task);
+            setDueDate.setText(dueDateUpdate);
+
+            if (task.length() > 0){
+                saveBtn.setEnabled(false);
+                saveBtn.setBackgroundColor(Color.GRAY);
+            }
+        }
 
         mTaskEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -111,38 +132,47 @@ public class addNewTask extends BottomSheetDialogFragment {
             }
         });
 
+        boolean finalIsUpdate = isUpdate;
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String task = mTaskEdit.getText().toString();
-                
-                if(task.isEmpty()) {
-                    Toast.makeText(context, "Please input something", Toast.LENGTH_SHORT).show();
-                } else {
-                    Map<String, Object> taskMap = new HashMap<>();
 
-                    taskMap.put("task", task);
-                    taskMap.put("due", dueDate);
-                    taskMap.put("status", 0);
+                if (finalIsUpdate){
+                    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                    firestore.collection("Users").document(currentFirebaseUser.getUid()).collection("Tasks").document(id).update("task", task, "due", dueDate);
+                    Toast.makeText(context, "Task Updated",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if (task.isEmpty()) {
+                        Toast.makeText(context, "Please input something", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Map<String, Object> taskMap = new HashMap<>();
 
-                    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+                        taskMap.put("task", task);
+                        taskMap.put("due", dueDate);
+                        taskMap.put("status", 0);
+                        taskMap.put("time", FieldValue.serverTimestamp());
 
-                    firestore.collection("Users").document(currentFirebaseUser.getUid()).collection("Tasks").add(taskMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentReference> task) {
-                            if ( task.isSuccessful()) {
-                                Toast.makeText(context, "Task saved", Toast.LENGTH_SHORT).show();
-                            } else {
-                               Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+                        firestore.collection("Users").document(currentFirebaseUser.getUid()).collection("Tasks").add(taskMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(context, "Task saved", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }
                 dismiss();
             }

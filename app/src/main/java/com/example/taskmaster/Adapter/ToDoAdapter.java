@@ -1,5 +1,7 @@
 package com.example.taskmaster.Adapter;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.taskmaster.R;
 import com.example.taskmaster.TaskList;
 import com.example.taskmaster.Tasks;
+import com.example.taskmaster.addNewTask;
 import com.example.taskmaster.model.ToDoModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -33,6 +38,31 @@ public class ToDoAdapter extends RecyclerView.Adapter <ToDoAdapter.ViewHolder> {
                 .inflate(R.layout.task_layout, parent, false);
         firestore = FirebaseFirestore.getInstance();
         return new ViewHolder(itemView);
+    }
+    public void deleteTask(int position){
+        ToDoModel toDoModel = todoList.get(position);
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        firestore.collection("Users").document(currentFirebaseUser.getUid()).collection("Tasks").document(toDoModel.TaskID).delete();
+        todoList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public Context getContext(){
+        return activity;
+    }
+
+    public void editTask(int position){
+        ToDoModel toDoModel = todoList.get(position);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("task", toDoModel.getTask());
+        bundle.putString("due", toDoModel.getDue());
+        bundle.putString("id", toDoModel.TaskID);
+
+        addNewTask addNewTask = new addNewTask();
+        addNewTask.setArguments(bundle);
+        addNewTask.show(activity.getSupportFragmentManager(), addNewTask.getTag());
+
     }
 
     public void onBindViewHolder(ViewHolder holder, int position){

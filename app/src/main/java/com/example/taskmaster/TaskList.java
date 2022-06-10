@@ -2,9 +2,11 @@ package com.example.taskmaster;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,19 +21,23 @@ import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TaskList extends AppCompatActivity {
+public class TaskList extends AppCompatActivity implements OnDialogCloseListener {
 
     private Button back, addbutton;
     private RecyclerView taskRecycler;
     private ToDoAdapter taskAdapter;
     private FirebaseFirestore firestore;
     private List<ToDoModel> taskList;
+    private Query query;
+    private ListenerRegistration listenerRegistration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +63,9 @@ public class TaskList extends AppCompatActivity {
         taskRecycler.setHasFixedSize(true);
         taskRecycler.setLayoutManager(new LinearLayoutManager(this));
         taskAdapter = new ToDoAdapter(TaskList.this, taskList);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new TouchHelper(taskAdapter));
+        itemTouchHelper.attachToRecyclerView(taskRecycler);
+        taskRecycler.setAdapter(taskAdapter);
 
         taskRecycler.setAdapter(taskAdapter);
         showData();
@@ -93,7 +102,8 @@ public class TaskList extends AppCompatActivity {
         //Object id = currentFirebaseUser.getUid();
         //Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
         // Testing the retrieval of userID
-        firestore.collection("Users").document(currentFirebaseUser.getUid()).collection("Tasks").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        query = firestore.collection("Users").document(currentFirebaseUser.getUid()).collection("Tasks").orderBy("time", Query.Direction.DESCENDING);
+        listenerRegistration = query.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 for (DocumentChange documentChange : value.getDocumentChanges()) {
@@ -105,9 +115,16 @@ public class TaskList extends AppCompatActivity {
                         taskAdapter.notifyDataSetChanged();
 
                     }
+
                 }
-                Collections.reverse(taskList);
+                listenerRegistration.remove();
             }
         });
+    }
+    @Override
+    public void onDialogClose(DialogInterface dialogInterface){
+        taskList.clear();
+        showData();
+        taskAdapter.notifyDataSetChanged();
     }
 }
