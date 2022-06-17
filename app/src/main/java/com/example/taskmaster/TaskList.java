@@ -103,6 +103,7 @@ public class TaskList extends AppCompatActivity implements OnDialogCloseListener
         //Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
         // Testing the retrieval of userID
         query = firestore.collection("Users").document(currentFirebaseUser.getUid()).collection("Tasks").orderBy("time", Query.Direction.DESCENDING);
+
         listenerRegistration = query.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
