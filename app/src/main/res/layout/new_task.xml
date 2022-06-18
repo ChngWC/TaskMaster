@@ -23,6 +23,7 @@
         android:layout_height="38dp"
         android:layout_alignBottom="@+id/newTaskText"
         android:layout_marginBottom="-44dp"
+        android:drawableLeft="@drawable/ic_baseline_calendar_today"
         android:drawablePadding="8dp"
         android:fontFamily="@font/press_start_2p"
         android:text="@string/set_due_date"

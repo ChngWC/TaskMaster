@@ -10,12 +10,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="8dp">
 
         <CheckBox
             android:id="@+id/toDoCheckBox"
-            android:layout_width="wrap_content"
+            android:layout_width="357dp"
             android:layout_height="wrap_content"
             android:buttonTint="@android:color/holo_green_dark"
             android:fontFamily="@font/press_start_2p"
@@ -26,12 +26,17 @@
             android:id="@+id/dueDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="26dp"
+            android:layout_below="@+id/toDoCheckBox"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/press_start_2p"
             android:text="@string/_21_01_22"
             android:textColor="#56CA03"
-            android:textSize="12sp" />
+            android:textSize="11sp"
+            tool:ignore="TextContrastCheck" />
 
 
     </RelativeLayout>
