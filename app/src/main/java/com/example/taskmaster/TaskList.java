@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.taskmaster.Adapter.ToDoAdapter;
 import com.example.taskmaster.model.ToDoModel;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -31,7 +32,7 @@ import java.util.List;
 
 public class TaskList extends AppCompatActivity implements OnDialogCloseListener {
 
-    private Button back, addbutton;
+    private Button back, addbutton, helpButton;
     private RecyclerView taskRecycler;
     private ToDoAdapter taskAdapter;
     private FirebaseFirestore firestore;
@@ -43,6 +44,14 @@ public class TaskList extends AppCompatActivity implements OnDialogCloseListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
+
+        helpButton = (Button) findViewById(R.id.help_button);
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTaskHelpWindow();
+            }
+        });
 
         back = (Button) findViewById(R.id.back_Button);
         back.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +104,10 @@ public class TaskList extends AppCompatActivity implements OnDialogCloseListener
         });
 
 
+    }
+
+    private void openTaskHelpWindow() {
+        startActivity(new Intent(TaskList.this, taskHelpWindow.class));
     }
 
     private void showData() {
