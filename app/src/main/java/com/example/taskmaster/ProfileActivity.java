@@ -24,7 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference reference;
     private String userID;
 
-    private Button signout, taskList;
+    private Button signout, taskList, toBattle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,15 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ProfileActivity.this, TaskList.class));
+            }
+        });
+
+        toBattle = (Button) findViewById(R.id.battle_Button);
+
+        toBattle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, MainGameActivity.class));
             }
         });
 
