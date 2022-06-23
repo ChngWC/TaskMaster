@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import com.example.taskmaster.GameObjects.CirclePlayer;
 import com.example.taskmaster.GameObjects.Enemy;
 import com.example.taskmaster.GameObjects.Player;
+import com.example.taskmaster.GameObjects.Weapons;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,6 +26,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameLoop;
    // private Context context;
     private List<Enemy> enemyList = new ArrayList<Enemy>();
+    private List<Weapons> weaponsList = new ArrayList<Weapons>();
+    private int joystickPointerId = 0;
+    private int numberOfWeaponsUsed = 0;
 
     public Game(Context context) {
         super(context);
@@ -48,21 +52,34 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event) {
 
         //Handle different touch events
-        switch(event.getAction()) {
+        switch(event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
-                if(joystick.isPressed((double)event.getX(), (double)event.getY())) {
+            case MotionEvent.ACTION_POINTER_DOWN:
+                if(joystick.getIsPressed()) {
+                    //Joystick was pressed before this event -> use weapon
+                    numberOfWeaponsUsed++;
+                } else if(joystick.isPressed((double)event.getX(), (double)event.getY())) {
+                    joystickPointerId = event.getPointerId(event.getActionIndex());
                     joystick.setIsPressed(true);
+                } else {
+                    numberOfWeaponsUsed++;
+                    //joystick was not previously pressed, and is not pressed in this event -> use weapon
                 }
                 //player.setPosition((double)event.getX(), (double)event.getY());
                 return true;
             case MotionEvent.ACTION_MOVE:
+                //joystick was pressed previously and is moved
                 if(joystick.getIsPressed()) {
                     joystick.setActuator((double)event.getX(), (double)event.getY());
                     }
                 return true;
             case MotionEvent.ACTION_UP:
-                joystick.setIsPressed(false);
-                joystick.resetActuator();
+            case MotionEvent.ACTION_POINTER_UP:
+                if(joystickPointerId == event.getPointerId(event.getActionIndex())) {
+                    // Joystick was let go of -> setIsPressed(false) and reset Actuator
+                    joystick.setIsPressed(false);
+                    joystick.resetActuator();
+                }
                 return true;
 
                 }
@@ -98,6 +115,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         for (Enemy enemy : enemyList){
             enemy.draw(canvas);
         }
+
+        for (Weapons weapons : weaponsList) {
+            weapons.draw(canvas);
+        }
     }
 
     public void drawUPS (Canvas canvas) {
@@ -129,15 +150,37 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         //update state of each enemy
+        while (numberOfWeaponsUsed > 0) {
+            weaponsList.add(new Weapons(getContext(), player));
+            numberOfWeaponsUsed--;
+        }
         for(Enemy enemy : enemyList) {
             enemy.update();
         }
 
+        //update state of each weapon
+        for(Weapons weapons : weaponsList) {
+            weapons.update();
+        }
+
         Iterator<Enemy> iteratorEnemy = enemyList.iterator();
         while (iteratorEnemy.hasNext()) {
-            if(CirclePlayer.isCollide(iteratorEnemy.next(), player)) {
+            CirclePlayer enemy = iteratorEnemy.next();
+            if(CirclePlayer.isCollide(enemy, player)) {
                 //remove enemy if collides with player
                 iteratorEnemy.remove();
+                continue;
+            }
+
+            Iterator<Weapons> iteratorWeapons = weaponsList.iterator();
+            while(iteratorWeapons.hasNext()) {
+                CirclePlayer weapon = iteratorWeapons.next();
+
+                if(CirclePlayer.isCollide(weapon, enemy)) {
+                    iteratorWeapons.remove();
+                    iteratorEnemy.remove();
+                    break;
+                }
             }
         }
     }
