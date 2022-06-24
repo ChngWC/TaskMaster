@@ -2,7 +2,9 @@ package com.example.taskmaster.GameStuff;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -18,6 +20,9 @@ import com.example.taskmaster.GameObjects.Weapons;
 import com.example.taskmaster.GamePanel.GameOver;
 import com.example.taskmaster.GamePanel.Joystick;
 import com.example.taskmaster.GamePanel.Performance;
+import com.example.taskmaster.MainActivity;
+import com.example.taskmaster.ProfileActivity;
+import com.example.taskmaster.Register_Page;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -33,7 +38,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private List<Weapons> weaponsList = new ArrayList<Weapons>();
     private int joystickPointerId = 0;
     private int numberOfWeaponsUsed = 0;
-    public static int score = 0;
+    public static int score;
+    public static int gameScore; //after player died
+    private static final int initialScore = 0;
     private GameOver gameOver;
     private Performance performance;
     private GameDisplay gameDisplay;
@@ -45,6 +52,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         SurfaceHolder surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
         //this.context = context;
+        score = initialScore;
 
          gameLoop = new GameLoop(this, surfaceHolder);
 
@@ -65,6 +73,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         setFocusable(true);
     }
+
+    public static int getGameScore() {
+        return gameScore;
+    }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -144,7 +157,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         // Draw Game over if player dieded health<=0
         if (player.getHealthPoints() <=0) {
+            gameScore = score;
             gameOver.draw(canvas);
+            //score = 0;
         }
     }
 
