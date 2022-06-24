@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.logInButton:
-                startActivity(new Intent(MainActivity.this, MainGameActivity.class));
+                //startActivity(new Intent(MainActivity.this, MainGameActivity.class));
 
                 userLogin();
                 break;
