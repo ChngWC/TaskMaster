@@ -1,11 +1,13 @@
-package com.example.taskmaster;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.taskmaster.TaskStuff;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.taskmaster.R;
 
 public class taskHelpWindow extends AppCompatActivity {
 

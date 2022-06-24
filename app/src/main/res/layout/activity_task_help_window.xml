@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#BA0404"
     android:backgroundTint="#BF0000"
-    tools:context=".taskHelpWindow">
+    tools:context=".TaskStuff.taskHelpWindow">
 
 
     <TextView

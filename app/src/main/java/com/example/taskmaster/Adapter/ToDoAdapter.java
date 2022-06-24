@@ -12,9 +12,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskmaster.R;
-import com.example.taskmaster.TaskList;
-import com.example.taskmaster.Tasks;
-import com.example.taskmaster.addNewTask;
+import com.example.taskmaster.TaskStuff.TaskList;
+import com.example.taskmaster.TaskStuff.addNewTask;
 import com.example.taskmaster.model.ToDoModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

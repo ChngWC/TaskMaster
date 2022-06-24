@@ -1,10 +1,8 @@
-package com.example.taskmaster;
+package com.example.taskmaster.GameStuff;
 
 import android.graphics.Canvas;
-import android.view.Surface;
+import android.util.Log;
 import android.view.SurfaceHolder;
-
-import java.util.Observer;
 
 public class GameLoop extends Thread{
     public static final double MAX_UPS = 60.0;
@@ -29,12 +27,14 @@ public class GameLoop extends Thread{
     }
 
     public void startLoop() {
+        Log.d("GameLoop.java", "startLoop()");
         isRunning = true;
         start();
     }
 
     @Override
     public void run() {
+        Log.d("GameLoop.java", "run()");
         super.run();
 
         int updateCount = 0;
@@ -94,6 +94,17 @@ public class GameLoop extends Thread{
 
             }
 
+        }
+    }
+
+    public void stopLoop() {
+        Log.d("GameLoop.java", "stopLoop()");
+        isRunning = false;
+        // Wait for thread to join
+        try {
+            join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

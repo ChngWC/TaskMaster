@@ -14,22 +14,22 @@
         android:theme="@style/Theme.TaskMaster"
         tools:targetApi="31">
         <activity
-            android:name=".MainGameActivity"
+            android:name=".GameStuff.MainGameActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:exported="false" />
         <activity
-            android:name=".taskHelpWindow"
+            android:name=".TaskStuff.taskHelpWindow"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.helpPopUpWindow" />
         <activity
             android:name=".splashActivity"
             android:exported="false" />
         <activity
-            android:name=".Tasks"
+            android:name=".TaskStuff.Tasks"
             android:exported="false" />
         <activity
-            android:name=".TaskList"
+            android:name=".TaskStuff.TaskList"
             android:exported="false" />
         <activity
             android:name=".reset"

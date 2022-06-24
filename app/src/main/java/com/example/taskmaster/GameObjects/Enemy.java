@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.core.content.ContextCompat;
 
-import com.example.taskmaster.GameLoop;
+import com.example.taskmaster.GameStuff.GameLoop;
 //import com.example.taskmaster.Player;
 import com.example.taskmaster.R;
 

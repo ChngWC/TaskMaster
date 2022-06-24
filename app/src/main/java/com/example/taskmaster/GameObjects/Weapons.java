@@ -1,12 +1,10 @@
 package com.example.taskmaster.GameObjects;
 
-import static com.example.taskmaster.GameObjects.Player.MAX_SPEED;
-
 import android.content.Context;
 
 import androidx.core.content.ContextCompat;
 
-import com.example.taskmaster.GameLoop;
+import com.example.taskmaster.GameStuff.GameLoop;
 import com.example.taskmaster.R;
 
 public class Weapons extends CirclePlayer {

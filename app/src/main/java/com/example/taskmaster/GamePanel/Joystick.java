@@ -1,8 +1,10 @@
-package com.example.taskmaster;
+package com.example.taskmaster.GamePanel;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+
+import com.example.taskmaster.Utilities;
 
 public class Joystick {
 

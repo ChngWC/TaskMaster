@@ -1,16 +1,10 @@
-package com.example.taskmaster;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.example.taskmaster.TaskStuff;
 
 import android.os.Bundle;
 
-import com.example.taskmaster.Adapter.ToDoAdapter;
-import com.example.taskmaster.model.ToDoModel;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.taskmaster.R;
 
 public class Tasks extends AppCompatActivity {
 

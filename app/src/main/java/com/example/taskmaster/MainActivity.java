@@ -1,8 +1,5 @@
 package com.example.taskmaster;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -12,13 +9,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.taskmaster.GameStuff.MainGameActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.logInButton:
+                startActivity(new Intent(MainActivity.this, MainGameActivity.class));
+
                 userLogin();
                 break;
 
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void userLogin() {
+
         String email = mainTextEmail.getText().toString().trim();
         String password = mainTextPassword.getText().toString().trim();
 

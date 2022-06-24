@@ -1,4 +1,10 @@
-package com.example.taskmaster;
+package com.example.taskmaster.TaskStuff;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,16 +12,12 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
 import com.example.taskmaster.Adapter.ToDoAdapter;
+import com.example.taskmaster.GameStuff.TouchHelper;
+import com.example.taskmaster.OnDialogCloseListener;
+import com.example.taskmaster.ProfileActivity;
+import com.example.taskmaster.R;
 import com.example.taskmaster.model.ToDoModel;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -27,7 +29,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TaskList extends AppCompatActivity implements OnDialogCloseListener {

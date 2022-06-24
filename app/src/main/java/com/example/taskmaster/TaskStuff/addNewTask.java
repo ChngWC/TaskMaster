@@ -1,4 +1,4 @@
-package com.example.taskmaster;
+package com.example.taskmaster.TaskStuff;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -20,6 +20,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.taskmaster.OnDialogCloseListener;
+import com.example.taskmaster.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
