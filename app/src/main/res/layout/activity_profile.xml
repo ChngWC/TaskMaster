@@ -36,8 +36,33 @@
         android:id="@+id/emailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginBottom="32dp"
+        android:fontFamily="@font/press_start_2p"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline10"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/highScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="612dp"
+        android:fontFamily="@font/press_start_2p"
+        android:text="@string/highscore"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/currentHighScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginBottom="612dp"
         android:fontFamily="@font/press_start_2p"
         android:textColor="#FFFFFF"
         android:textSize="11sp"
@@ -48,60 +73,90 @@
         android:id="@+id/nameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/press_start_2p"
         android:textColor="#FFFFFF"
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline10"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/taskList_button"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="72dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         android:backgroundTint="#D3BE01"
         android:fontFamily="@font/press_start_2p"
         android:text="@string/tasklist"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/signout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.21"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/battle_Button"
+        app:layout_constraintEnd_toEndOf="@id/guideline9"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline8"
+        app:layout_constraintTop_toBottomOf="@id/highScore"
+        app:layout_constraintVertical_bias="0"
         tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/battle_Button"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="72dp"
         android:backgroundTint="#AF6000"
         android:fontFamily="@font/press_start_2p"
         android:text="@string/to_battle"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/signout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.359"
+        app:layout_constraintBottom_toTopOf="@+id/upgrade_Button"
+        app:layout_constraintEnd_toEndOf="@id/guideline9"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/guideline8"
+        app:layout_constraintTop_toBottomOf="@id/taskList_button"
+        app:layout_constraintVertical_bias="0"
         tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/upgrade_Button"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="72dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#03A376"
         android:fontFamily="@font/press_start_2p"
         android:text="@string/upgrades"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/signout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.51"
+        app:layout_constraintEnd_toEndOf="@id/guideline9"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/guideline8"
+        app:layout_constraintTop_toBottomOf="@id/battle_Button"
         tools:ignore="TextContrastCheck" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

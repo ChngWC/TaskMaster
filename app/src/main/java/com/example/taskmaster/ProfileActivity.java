@@ -71,6 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
         final TextView emailTextView = (TextView) findViewById(R.id.emailText);
         final TextView nameTextView = (TextView)  findViewById(R.id.nameText);
 
+
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
