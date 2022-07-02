@@ -23,6 +23,7 @@ import com.example.taskmaster.GamePanel.Performance;
 import com.example.taskmaster.MainActivity;
 import com.example.taskmaster.ProfileActivity;
 import com.example.taskmaster.Register_Page;
+import com.example.taskmaster.graphics.SpriteSheet;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -63,7 +64,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
 
          //Initialise game objects
-         player = new Player(context, joystick,2*500, 500, 30);
+        SpriteSheet spriteSheet = new SpriteSheet(context);
+        player = new Player(context, joystick,2*500, 500, 30, spriteSheet.getPlayerSprite());
         // enemy = new Enemy(getContext(), player,2*500, 200, 30);
 
         // Initialise game display and center it around the playaer

@@ -11,6 +11,7 @@ import com.example.taskmaster.GameStuff.GameDisplay;
 import com.example.taskmaster.GameStuff.GameLoop;
 import com.example.taskmaster.R;
 import com.example.taskmaster.Utilities;
+import com.example.taskmaster.graphics.Sprite;
 
 public class Player extends CirclePlayer {
     public static final double SPEED_PIXELS_PER_SEC = 400.0;
@@ -19,13 +20,15 @@ public class Player extends CirclePlayer {
     public static final int max_health_points = 10;
     private HealthBar healthBar;
     private int healthPoints;
+    private Sprite sprite;
 
 
-    public Player(Context context,Joystick joystick, double positionX, double positionY, double radius) {
+    public Player(Context context,Joystick joystick, double positionX, double positionY, double radius, Sprite sprite) {
         super(context, ContextCompat.getColor(context, R.color.player), positionX, positionY, radius);
         this.joystick = joystick;
         this.healthBar = new HealthBar(context,this);
         this.healthPoints =  max_health_points;
+        this.sprite = sprite;
     }
 
 
@@ -51,7 +54,9 @@ public class Player extends CirclePlayer {
     }
 
     public void draw(Canvas canvas, GameDisplay gameDisplay) {
-        super.draw(canvas, gameDisplay);
+        sprite.draw(canvas,
+                (int) gameDisplay.gameToDisplayCoordinatesX(getPositionX()) - sprite.getWidth()/2,
+                (int) gameDisplay.gameToDisplayCoordinatesY(getPositionY()) - sprite.getHeight()/2);
         healthBar.draw(canvas, gameDisplay);
     }
 
