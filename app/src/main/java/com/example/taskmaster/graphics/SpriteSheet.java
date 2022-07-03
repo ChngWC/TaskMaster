@@ -25,4 +25,6 @@ public class SpriteSheet {
     public Bitmap getBitmap() {
         return bitmap;
     }
+
+    public Sprite getEnemySprite() {return new Sprite(this, new Rect(64, 0, 128, 64));}
 }

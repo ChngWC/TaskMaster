@@ -1,12 +1,15 @@
 package com.example.taskmaster.GameObjects;
 
 import android.content.Context;
+import android.graphics.Canvas;
 
 import androidx.core.content.ContextCompat;
 
+import com.example.taskmaster.GameStuff.GameDisplay;
 import com.example.taskmaster.GameStuff.GameLoop;
 //import com.example.taskmaster.Player;
 import com.example.taskmaster.R;
+import com.example.taskmaster.graphics.Sprite;
 
 /***
  * enemy is a character which always moves towards to player
@@ -20,19 +23,28 @@ public class Enemy extends CirclePlayer {
     private static final double UPDATES_PER_SPAWN = GameLoop.MAX_UPS/SPAWNS_PER_SECOND;
     private static double updatesUntilNextSpawn = UPDATES_PER_SPAWN;
     private final Player player;
+    private  Sprite sprite;
 
-    public Enemy(Context context, Player player , double positionX, double positionY, double radius) {
+    public Enemy(Context context, Player player , double positionX, double positionY, double radius, Sprite sprite) {
         super(context, ContextCompat.getColor(context, R.color.enemy), positionX, positionY, radius);
         this.player = player;
+        this.sprite = sprite;
     }
 
-    public Enemy(Context context, Player player) {
+    public Enemy(Context context, Player player, Sprite sprite) {
         super(context,
                 ContextCompat.getColor(context, R.color.enemy),
                 Math.random()*1000,
                 Math.random()*1000,
                 30);
         this.player = player;
+        this.sprite = sprite;
+    }
+
+    public void draw(Canvas canvas, GameDisplay gameDisplay) {
+        sprite.draw(canvas,
+                (int) gameDisplay.gameToDisplayCoordinatesX(getPositionX()) - sprite.getWidth()/2,
+                (int) gameDisplay.gameToDisplayCoordinatesY(getPositionY()) - sprite.getHeight()/2);
     }
 
     public static boolean readyToSpawn() {

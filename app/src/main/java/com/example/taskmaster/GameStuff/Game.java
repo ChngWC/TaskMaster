@@ -180,7 +180,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         //spawn enemy when available
         if(Enemy.readyToSpawn()) {
-            enemyList.add(new Enemy(getContext(), player));
+            SpriteSheet spriteSheet = new SpriteSheet(getContext());
+            enemyList.add(new Enemy(getContext(), player, spriteSheet.getEnemySprite()));
         }
 
         //update state of each enemy
