@@ -7,6 +7,16 @@
     android:background="@drawable/taskmasterbackgroundwithoutname"
     tools:context=".ProfileActivity">
 
+    <TextView
+        android:id="@+id/HighScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/press_start_2p"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@id/guideline16"
+        app:layout_constraintStart_toEndOf="@+id/highScore" />
+
     <Button
         android:id="@+id/signout"
         android:layout_width="wrap_content"
@@ -48,26 +58,13 @@
         android:id="@+id/highScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="612dp"
         android:fontFamily="@font/press_start_2p"
         android:text="@string/highscore"
         android:textColor="#FFFFFF"
         android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/currentHighScore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
-        android:layout_marginBottom="612dp"
-        android:fontFamily="@font/press_start_2p"
-        android:textColor="#FFFFFF"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline16"
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
+        android:layout_marginLeft="15dp"/>
 
     <TextView
         android:id="@+id/nameText"
@@ -158,5 +155,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

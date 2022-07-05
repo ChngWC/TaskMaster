@@ -143,6 +143,9 @@ public class Register_Page extends AppCompatActivity implements View.OnClickList
                                                 userMap.put("Name",fullName);
                                                 userMap.put("Email", email);
                                                 documentReference.set(userMap);
+                                                Map<String, Integer> gameScoreMap = new HashMap<>();
+                                                gameScoreMap.put("Highest", 0);
+                                                firestore.collection("Users").document(user.getUid()).collection("HighestScore").document("HighScoreMap").set(gameScoreMap);
                                                 FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
                                                 startActivity(new Intent(Register_Page.this, MainActivity.class));
                                                 //redirect to login page
