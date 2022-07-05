@@ -24,6 +24,7 @@ import com.example.taskmaster.MainActivity;
 import com.example.taskmaster.ProfileActivity;
 import com.example.taskmaster.Register_Page;
 import com.example.taskmaster.graphics.SpriteSheet;
+import com.example.taskmaster.map.Tilemap;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,6 +33,7 @@ import java.util.List;
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
     private final Joystick joystick;
+    private final Tilemap tilemap;
     //private final Enemy enemy;
     private GameLoop gameLoop;
    // private Context context;
@@ -72,6 +74,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         gameDisplay = new GameDisplay(displayMetrics.widthPixels, displayMetrics.heightPixels, player);
+
+
+        // Initialise Tilemap
+        tilemap = new Tilemap(spriteSheet);
+
 
         setFocusable(true);
     }
@@ -143,6 +150,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw (Canvas canvas) {
         super.draw(canvas);
+
+        //Draw Tilemap
+        tilemap.draw(canvas, gameDisplay);
 
         player.draw(canvas, gameDisplay);
 

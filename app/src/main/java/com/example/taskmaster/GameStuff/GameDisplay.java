@@ -1,9 +1,14 @@
 package com.example.taskmaster.GameStuff;
 
+import android.graphics.Rect;
+
 import com.example.taskmaster.GameObjects.GameObject;
 
 public class GameDisplay {
 
+    public final Rect DISPLAY_RECT;
+    private final int widthPixels;
+    private final int heightPixels;
     private double gameToDisplayCoordinateOffsetY;
     private double gameToDisplayCoordinateOffsetX;
     private double displayCenterX;
@@ -13,6 +18,9 @@ public class GameDisplay {
     private GameObject centerObject;
 
     public GameDisplay(int widthPixels, int heightPixels, GameObject centerObject) {
+        this.widthPixels = widthPixels;
+        this.heightPixels = heightPixels;
+        DISPLAY_RECT = new Rect(0,0,widthPixels,heightPixels);
 
         this.centerObject = centerObject;
 
@@ -35,5 +43,14 @@ public class GameDisplay {
 
     public double gameToDisplayCoordinatesY(double y) {
         return y + gameToDisplayCoordinateOffsetY;
+    }
+
+    public Rect getGameRect() {
+        return new Rect(
+                (int) (gameCenterX  - widthPixels/2),
+                (int) (gameCenterY - heightPixels/2),
+                (int) (gameCenterX  + widthPixels/2),
+                (int) (gameCenterY + heightPixels/2)
+        );
     }
 }
