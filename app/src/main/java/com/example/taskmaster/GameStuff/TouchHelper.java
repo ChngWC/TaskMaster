@@ -6,11 +6,23 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskmaster.Adapter.ToDoAdapter;
 import com.example.taskmaster.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
@@ -39,6 +51,10 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             adapter.deleteTask(position);
+                            FirebaseFirestore firestore =  FirebaseFirestore.getInstance();
+                            FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+                            DocumentReference documentReference = firestore.collection("Users").document(currentFirebaseUser.getUid()).collection("Credits").document("creditMap");
+                            firestore.collection("Users").document(currentFirebaseUser.getUid()).collection("Credits").document("creditMap").update("userCredit", FieldValue.increment(100));
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override

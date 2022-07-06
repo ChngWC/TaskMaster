@@ -26,6 +26,9 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ProfileActivity extends AppCompatActivity {
 
     private FirebaseUser user;
@@ -121,6 +124,25 @@ public class ProfileActivity extends AppCompatActivity {
                 int HighestScore = (documentSnapshot.getLong("Highest").intValue());
                 String highScoreText = HighestScore + " points";
                 highScore.setText(highScoreText);
+            }
+        });
+
+        TextView credit = (TextView) findViewById(R.id.currentCredit);
+        DocumentReference creditDoc = fstore.collection("Users").document(userID).collection("Credits").document("creditMap");
+        creditDoc.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value.exists()) {
+                    int currentCredit = (value.getLong("userCredit").intValue());
+                    String creditDisplay = currentCredit + " credits";
+                    credit.setText(creditDisplay);
+                } else {
+                    Map<String, Integer> creditMap = new HashMap<>();
+                    creditMap.put("userCredit", 0);
+                    fstore.collection("Users").document(userID).collection("Credits").document("creditMap").set(creditMap);
+                    String creditDisplay = 0 + "credits";
+                    credit.setText(creditDisplay);
+                }
             }
         });
 

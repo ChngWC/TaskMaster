@@ -17,6 +17,16 @@
         app:layout_constraintBottom_toTopOf="@id/guideline16"
         app:layout_constraintStart_toEndOf="@+id/highScore" />
 
+    <TextView
+        android:id="@+id/currentCredit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/press_start_2p"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        app:layout_constraintTop_toBottomOf="@id/guideline16"
+        app:layout_constraintStart_toEndOf="@+id/credit" />
+
     <Button
         android:id="@+id/signout"
         android:layout_width="wrap_content"
@@ -67,6 +77,18 @@
         android:layout_marginLeft="15dp"/>
 
     <TextView
+        android:id="@+id/credit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:fontFamily="@font/press_start_2p"
+        android:text="Credit:"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
+        app:layout_constraintTop_toBottomOf="@+id/guideline16" />
+
+    <TextView
         android:id="@+id/nameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -93,7 +115,7 @@
         app:layout_constraintEnd_toEndOf="@id/guideline9"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline8"
-        app:layout_constraintTop_toBottomOf="@id/highScore"
+        app:layout_constraintTop_toBottomOf="@id/credit"
         app:layout_constraintVertical_bias="0"
         tools:ignore="TextContrastCheck" />
 
