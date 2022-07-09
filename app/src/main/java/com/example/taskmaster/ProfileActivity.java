@@ -35,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference reference;
     private String userID;
 
-    private Button signout, taskList, toBattle;
+    private Button signout, taskList, toBattle, upgradeBttn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,14 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ProfileActivity.this, MainGameActivity.class));
+            }
+        });
+
+        upgradeBttn = (Button) findViewById(R.id.upgrade_Button);
+        upgradeBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, upgrade_Page.class));
             }
         });
 
@@ -142,6 +150,20 @@ public class ProfileActivity extends AppCompatActivity {
                     fstore.collection("Users").document(userID).collection("Credits").document("creditMap").set(creditMap);
                     String creditDisplay = 0 + "credits";
                     credit.setText(creditDisplay);
+                }
+            }
+        });
+
+        DocumentReference HPDoc = fstore.collection("Users").document(userID).collection("stats").document("statsMap");
+        HPDoc.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value.exists()) {
+                    int currentHP = (value.getLong("userMaxHP").intValue());
+                } else {
+                    Map<String, Integer> HPMap = new HashMap<>();
+                    HPMap.put("userMaxHP", 10);
+                    fstore.collection("Users").document(userID).collection("stats").document("statsMap").set(HPMap);
                 }
             }
         });
