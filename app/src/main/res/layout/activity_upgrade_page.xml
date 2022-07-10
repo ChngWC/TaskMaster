@@ -8,6 +8,13 @@
     android:backgroundTint="#000000"
     tools:context=".upgrade_Page">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.37" />
+
     <TextView
         android:id="@+id/userMaxHealth"
         android:layout_width="wrap_content"
@@ -72,6 +79,42 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.042" />
 
+    <TextView
+        android:id="@+id/collegeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/press_start_2p"
+        android:text="College student"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline22"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/knightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/press_start_2p"
+        android:text="Mr.Knight"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline22"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/wizardText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/press_start_2p"
+        android:text="Wizard Dog"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline22"
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline21"
         android:layout_width="wrap_content"
@@ -103,7 +146,62 @@
         app:layout_constraintTop_toBottomOf="@id/guideline21" />
 
     <Button
-        android:id="@+id/upgradBack_Button2"
+        android:id="@+id/select_bttn_knight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#037D9C"
+        android:fontFamily="@font/press_start_2p"
+        android:text="select"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline22"
+        app:layout_constraintTop_toBottomOf="@+id/knightText" />
+
+    <Button
+        android:id="@+id/select_bttn_wizard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#037D9C"
+        android:fontFamily="@font/press_start_2p"
+        android:text="select"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline22"
+        app:layout_constraintTop_toBottomOf="@+id/wizardText2" />
+
+    <Button
+        android:id="@+id/buy_bttn_knight2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#CC4305"
+        android:fontFamily="@font/press_start_2p"
+        android:text="5000 credits"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline22"
+        app:layout_constraintTop_toBottomOf="@+id/select_bttn_knight" />
+
+    <Button
+        android:id="@+id/buy_bttn_wizard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#CC4305"
+        android:fontFamily="@font/press_start_2p"
+        android:text="10000 credits"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline22"
+        app:layout_constraintTop_toBottomOf="@+id/select_bttn_wizard" />
+
+    <Button
+        android:id="@+id/select_bttn_college"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#037D9C"
+        android:fontFamily="@font/press_start_2p"
+        android:text="select"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline22"
+        app:layout_constraintTop_toBottomOf="@+id/collegeText" />
+
+    <Button
+        android:id="@+id/upgradBack_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -112,9 +210,7 @@
         android:text="@string/back"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="@id/guideline17"
-        app:layout_constraintVertical_bias="0" />
+        app:layout_constraintStart_toStartOf="@id/guideline17" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline17"
@@ -148,11 +244,36 @@
         android:id="@+id/maxHealth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/press_start_2p"
         android:text="Increase Max HP!"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@id/guideline17"
         app:layout_constraintTop_toBottomOf="@+id/userMaxHealth" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toBottomOf="@+id/increaseMax_bttn"
+        app:srcCompat="@drawable/peasant" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:srcCompat="@drawable/knight" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:srcCompat="@drawable/dogwizard" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,7 +38,7 @@ public class upgrade_Page extends AppCompatActivity {
 
         firestore = FirebaseFirestore.getInstance();
 
-        backBttn = (Button) findViewById(R.id.upgradBack_Button2);
+        backBttn = (Button) findViewById(R.id.upgradBack_Button);
         backBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
