@@ -13,4 +13,5 @@
     <color name="healthBarBorder">#FFFDFD</color>
     <color name="healthBarHealth">#4CAF50</color>
     <color name="gameOver">#E92A1C</color>
+    <color name="selected">#006400</color>
 </resources>
