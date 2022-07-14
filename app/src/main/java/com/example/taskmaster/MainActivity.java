@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button logIn, forgor;
 
     private FirebaseAuth mAuth;
-    private ProgressBar mainProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +44,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mainTextEmail = (TextInputEditText)  findViewById(R.id.mainEmail);
         mainTextPassword = (TextInputEditText)  findViewById(R.id.mainPassword);
-
-        mainProgressBar = (ProgressBar) findViewById(R.id.mainProgress);
 
         mAuth = FirebaseAuth.getInstance();
     }
@@ -101,8 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mainTextPassword.requestFocus();
             return;
         }
-
-        mainProgressBar.setVisibility(View.VISIBLE);
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
