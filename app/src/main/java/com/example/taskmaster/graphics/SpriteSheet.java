@@ -90,12 +90,12 @@ public class SpriteSheet {
         this.skins = skintype;
         if (skins == 0) {
             Log.d("SpriteSheet.java", "0");
-            // returns lava sprite
-            return getSpriteByIndex(2,1);
+            // returns college sprite
+            return getSpriteByIndex(0,3);
         } else if (skins == 1){
             Log.d("SpriteSheet.java", "1");
-            // returns water sprite
-            return getSpriteByIndex(2,0);
+            // returns knight sprite
+            return getSpriteByIndex(0,2);
         } else {
             Log.d("SpriteSheet.java", "2");
             // returns wizard sprite
@@ -115,9 +115,8 @@ public class SpriteSheet {
     public Sprite getLavaSprite() {
         return getSpriteByIndex(2,1);
     }
-    public Sprite getGroundSprite() {
-        return getSpriteByIndex(2,2);
-    }
+    //public Sprite getGroundSprite() {return getSpriteByIndex(2,2);}
+    public Sprite getGroundSprite(){ return new Sprite (this, new Rect(0,192,128,320));}
     public Sprite getGrassSprite() {
         return getSpriteByIndex(2,3);
     }
