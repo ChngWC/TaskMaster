@@ -10,6 +10,7 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.taskmaster.ProfileActivity;
+import com.example.taskmaster.R;
 
 public class MainGameActivity extends AppCompatActivity {
 
@@ -64,9 +65,5 @@ public class MainGameActivity extends AppCompatActivity {
         Log.d("MainGameActivity.java", "onBackPressed");
         //super.onBackPressed();
         startActivity(new Intent(MainGameActivity.this, ProfileActivity.class));
-    }
-
-    public void goBack() {
-                startActivity(new Intent(MainGameActivity.this, ProfileActivity.class));
     }
 }

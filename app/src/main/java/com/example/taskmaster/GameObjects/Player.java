@@ -31,7 +31,7 @@ public class Player extends CirclePlayer {
     public static final double SPEED_PIXELS_PER_SEC = 400.0;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SEC / GameLoop.MAX_UPS;
     private final Joystick joystick;
-    public static int max_health_points;
+    public static int max_health_points = 10;
     private HealthBar healthBar;
     private int healthPoints;
     private Sprite sprite;

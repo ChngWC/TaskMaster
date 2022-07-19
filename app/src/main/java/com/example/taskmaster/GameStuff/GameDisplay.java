@@ -45,6 +45,14 @@ public class GameDisplay {
         return y + gameToDisplayCoordinateOffsetY;
     }
 
+    /*public Rect getGameRect() {
+        return new Rect(
+                (int) (gameCenterX  - widthPixels/2),
+                (int) (gameCenterY - heightPixels/2),
+                (int) (gameCenterX  + widthPixels/2),
+                (int) (gameCenterY + heightPixels/2)
+        );
+    }*/
     public Rect getGameRect() {
         return new Rect(
                 (int) (gameCenterX  - widthPixels/2),
@@ -53,4 +61,5 @@ public class GameDisplay {
                 (int) (gameCenterY + heightPixels/2)
         );
     }
+
 }

@@ -67,7 +67,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
          //Initialise game objects
         SpriteSheet spriteSheet = new SpriteSheet(context);
-        player = new Player(context, joystick,2*500, 500, 30, spriteSheet.getPlayerSprite());
+        //player = new Player(context, joystick,2*500, 500, 30, spriteSheet.getPlayerSprite());
+        player = new Player(context, joystick,4*2*500, 4*2*500, 30, spriteSheet.getPlayerSprite());
         // enemy = new Enemy(getContext(), player,2*500, 200, 30);
 
         // Initialise game display and center it around the playaer
