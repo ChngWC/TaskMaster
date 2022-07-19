@@ -20,7 +20,7 @@ public class reset extends AppCompatActivity {
 
     private EditText forgotemail;
     private Button resetpassword;
-    private ProgressBar progressBar3;
+    //private ProgressBar progressBar3;
 
     FirebaseAuth auth;
 
@@ -31,7 +31,7 @@ public class reset extends AppCompatActivity {
 
         forgotemail=(EditText) findViewById(R.id.forgotemail);
         resetpassword=(Button) findViewById(R.id.resetpassword);
-        progressBar3= (ProgressBar) findViewById(R.id.progressBar3);
+        //progressBar3= (ProgressBar) findViewById(R.id.progressBar3);
 
         auth= FirebaseAuth.getInstance();
 
@@ -58,7 +58,7 @@ public class reset extends AppCompatActivity {
             return;
         }
 
-        progressBar3.setVisibility(View.VISIBLE);
+        //progressBar3.setVisibility(View.VISIBLE);
         auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

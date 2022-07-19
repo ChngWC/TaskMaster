@@ -1,5 +1,7 @@
 package com.example.taskmaster.GameObjects;
 
+import static com.example.taskmaster.ProfileActivity.health;
+
 import android.content.Context;
 import android.graphics.Canvas;
 
@@ -31,7 +33,7 @@ public class Player extends CirclePlayer {
     public static final double SPEED_PIXELS_PER_SEC = 400.0;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SEC / GameLoop.MAX_UPS;
     private final Joystick joystick;
-    public static int max_health_points = 10;
+    public static int max_health_points = health;
     private HealthBar healthBar;
     private int healthPoints;
     private Sprite sprite;
@@ -47,13 +49,13 @@ public class Player extends CirclePlayer {
         //this.healthPoints = 10;
         this.sprite = sprite;
 
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        /*firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userID = firebaseUser.getUid();
 
         firestore = FirebaseFirestore.getInstance();
 
         DocumentReference HPDoc = firestore.collection("Users").document(userID).collection("stats").document("statsMap");
-        /*HPDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        HPDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -70,7 +72,7 @@ public class Player extends CirclePlayer {
             }
         });*/
 
-        HPDoc.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        /*HPDoc.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(value.exists()){
@@ -82,9 +84,8 @@ public class Player extends CirclePlayer {
                     max_health_points = 10;
                 }
             }
-        });
+        });*/
         this.healthPoints = max_health_points;
-
     }
 
 

@@ -79,6 +79,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/mainEmail"
+            android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/press_start_2p"

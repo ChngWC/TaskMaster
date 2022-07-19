@@ -1,5 +1,7 @@
 package com.example.taskmaster.graphics;
 
+import static com.example.taskmaster.ProfileActivity.skintype;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,7 +32,6 @@ public class SpriteSheet {
     private FirebaseUser firebaseUser;
     private FirebaseFirestore firestore;
     private String userID;
-    public static int skintype;
     private int skins;
 
     // replace monster with sprite_sheet
@@ -46,7 +47,7 @@ public class SpriteSheet {
         userID = firebaseUser.getUid();
         firestore = FirebaseFirestore.getInstance();
 
-        DocumentReference collegeSkin = firestore.collection("Users").document(userID).collection("stats").document("CollegeSkin");
+        /*DocumentReference collegeSkin = firestore.collection("Users").document(userID).collection("stats").document("CollegeSkin");
         DocumentReference knightSkin = firestore.collection("Users").document(userID).collection("stats").document("KnightSkin");
         DocumentReference wizardSkin = firestore.collection("Users").document(userID).collection("stats").document("WizardSkin");
 
@@ -86,7 +87,7 @@ public class SpriteSheet {
                     }
                 }
             }
-        });
+        });*/
         this.skins = skintype;
         if (skins == 0) {
             Log.d("SpriteSheet.java", "0");

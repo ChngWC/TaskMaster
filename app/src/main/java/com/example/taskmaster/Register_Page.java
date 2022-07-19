@@ -35,7 +35,7 @@ import java.util.Map;
 public class Register_Page extends AppCompatActivity implements View.OnClickListener{
 
     private TextInputEditText editTextFullName, editTextEmail, editTextPassword;
-     private ProgressBar progressBar;
+     //private ProgressBar progressBar;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
@@ -55,7 +55,6 @@ public class Register_Page extends AppCompatActivity implements View.OnClickList
         editTextEmail = (TextInputEditText)  findViewById(R.id.emailRegister);
         editTextPassword = (TextInputEditText)  findViewById(R.id.passwordRegister);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
     }
 
     @Override
@@ -115,7 +114,7 @@ public class Register_Page extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        //progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -134,7 +133,7 @@ public class Register_Page extends AppCompatActivity implements View.OnClickList
 
                                             if(task.isSuccessful()) {
                                                 Toast.makeText(Register_Page.this, "Please check email for verification (spam)!", Toast.LENGTH_LONG).show();
-                                                progressBar.setVisibility(View.GONE);
+                                                //progressBar.setVisibility(View.GONE);
                                                 FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
                                                 user.sendEmailVerification();
                                                 firestore = FirebaseFirestore.getInstance();
@@ -151,13 +150,13 @@ public class Register_Page extends AppCompatActivity implements View.OnClickList
                                                 //redirect to login page
                                             } else {
                                                 Toast.makeText(Register_Page.this, "User fail to register!", Toast.LENGTH_LONG).show();
-                                                progressBar.setVisibility(View.GONE);
+                                                //progressBar.setVisibility(View.GONE);
                                             }
                                         }
                                     });
                         } else {
                             Toast.makeText(Register_Page.this, "User fail to register!", Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.GONE);
+                            //progressBar.setVisibility(View.GONE);
                         }
                     }
                 });

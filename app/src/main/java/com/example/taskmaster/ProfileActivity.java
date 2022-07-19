@@ -2,6 +2,7 @@ package com.example.taskmaster;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -34,6 +35,8 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
+    public static int health;
+    public static int skintype;
 
     private Button signout, taskList, toBattle, upgradeBttn;
 
@@ -77,6 +80,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(ProfileActivity.this, "Successfully signed out!", Toast.LENGTH_LONG).show();
+                finishAffinity();
                 startActivity(new Intent(ProfileActivity.this, MainActivity.class));
             }
         });
@@ -159,11 +163,53 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (value.exists()) {
-                    int currentHP = (value.getLong("userMaxHP").intValue());
+                    health = (value.getLong("userMaxHP").intValue());
                 } else {
                     Map<String, Integer> HPMap = new HashMap<>();
                     HPMap.put("userMaxHP", 10);
                     fstore.collection("Users").document(userID).collection("stats").document("statsMap").set(HPMap);
+                }
+            }
+        });
+
+        DocumentReference collegeSkin = fstore.collection("Users").document(userID).collection("stats").document("CollegeSkin");
+        DocumentReference knightSkin = fstore.collection("Users").document(userID).collection("stats").document("KnightSkin");
+        DocumentReference wizardSkin = fstore.collection("Users").document(userID).collection("stats").document("WizardSkin");
+
+        collegeSkin.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value.exists()) {
+                    boolean selected = value.getBoolean("select");
+                    if (selected) {
+                        skintype = 0;
+                        Log.d("SpriteSheet.java", "College skin");
+                    }
+                }
+            }
+        });
+
+        knightSkin.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value.exists()) {
+                    boolean selected = value.getBoolean("select");
+                    if (selected) {
+                        skintype = 1;
+                        Log.d("SpriteSheet.java", "knight skin");
+                    }
+                }
+            }
+        });
+        wizardSkin.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value.exists()){
+                    boolean selected = value.getBoolean("select");
+                    if (selected) {
+                        skintype = 2;
+                        Log.d("SpriteSheet.java", "wizard skin");
+                    }
                 }
             }
         });

@@ -64,8 +64,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         gameOver = new GameOver(context);
         joystick = new Joystick(275, 800, 70, 40);
 
-
-         //Initialise game objects
+        //Initialise game objects
         SpriteSheet spriteSheet = new SpriteSheet(context);
         //player = new Player(context, joystick,2*500, 500, 30, spriteSheet.getPlayerSprite());
         player = new Player(context, joystick,4*2*500, 4*2*500, 30, spriteSheet.getPlayerSprite());
